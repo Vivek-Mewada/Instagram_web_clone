@@ -23,5 +23,14 @@ module InstaClone
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+
+    config.to_prepare do
+      Devise::SessionsController.layout "auth"
+      Devise::RegistrationsController.layout "auth"
+      # Devise::ConfirmationsController.layout "your_layout_name"
+      # Devise::UnlocksController.layout "your_layout_name"
+      # Devise::PasswordsController.layout "your_layout_name"
+    end
   end
 end
