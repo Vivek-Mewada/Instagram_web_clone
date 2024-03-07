@@ -2,6 +2,8 @@
 
 class Users::SessionsController < Devise::SessionsController
   before_action :configure_sign_in_params, only: [:create]
+  # skip_before_action :verify_authenticity_token, only: [:create]
+
 
   # GET /resource/sign_in
   # def new
@@ -10,7 +12,11 @@ class Users::SessionsController < Devise::SessionsController
 
   # POST /resource/sign_in
   def create
+    # if User.find_by(username: params['user']['username']).present?
       super
+    # else
+    #   pust '===================================================================================='
+    # end
   end
 
   # DELETE /resource/sign_out
