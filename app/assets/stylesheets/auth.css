@@ -91,6 +91,12 @@
     margin-bottom: 30px
   }
   
+  .c-panel .c-panel__img1 {
+    height: 130px;
+    width: 150px;
+    margin-bottom: 15px
+  }
+
   .c-panel .c-panel__form {
     display: flex;
     flex-direction: column;
@@ -181,6 +187,19 @@
     line-height: 18px;
     padding: 7px;
   }
+
+  .c-btn1 {
+    color: #fff;
+    font-weight: 500;
+    width: 100%;
+    border: none;
+    background: #0095f6;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 18px;
+    padding: 7px;
+    margin:10px 0 35px 0;
+  }
   
   .c-app p {
     text-align: center;
@@ -225,4 +244,21 @@
   #error_explanation ul {
     color: #404040;
     list-style-type: none;
+  }
+
+  .forgot_password_text{
+    text-align: center;
+  }
+
+  .forgot_password_text p {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .forgot_password_text a {
+    /* color: red; */
+    margin: 0 0.25rem 0.25rem 0.25rem;
+    display: block;
+    padding: 1rem 0
   }

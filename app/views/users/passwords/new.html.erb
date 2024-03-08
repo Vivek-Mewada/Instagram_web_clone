@@ -1,16 +1,38 @@
-<h2>Forgot your password?</h2>
-
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<div class="c-panel group">
+  <%= image_tag 'security.png', class: "c-panel__img1" %> 
+  <div class="forgot_password_text">
+    <p>Forgot your password?</p>
+    <a>Enter your email address so we'll send you<br> a link to get back into your account.</a>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
+  <div class="c-panel__form">
 
-<%= render "users/shared/links" %>
+
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+    <%= render "users/shared/error_messages", resource: resource %>
+
+    <div class="field">
+      <%= f.email_field :email, class: "c-panel__input", placeholder: "Email" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Send me reset password instructions", class: "c-btn1" %>
+    </div>
+  <% end %>
+  
+  </div>
+</div>
+<div class="c-signup group">
+  <p>Don't Reset Password? <span> <%= link_to "Log in", new_session_path(resource_name) %></span></p>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+

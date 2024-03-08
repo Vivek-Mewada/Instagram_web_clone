@@ -30,7 +30,7 @@ module InstaClone
       Devise::RegistrationsController.layout "auth"
       # Devise::ConfirmationsController.layout "your_layout_name"
       # Devise::UnlocksController.layout "your_layout_name"
-      # Devise::PasswordsController.layout "your_layout_name"
+      Devise::PasswordsController.layout "auth"
     end
   end
 end
