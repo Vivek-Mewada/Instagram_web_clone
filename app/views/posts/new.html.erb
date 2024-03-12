@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <%= stylesheet_link_tag :post %>
+</head>
+
+<body>
+  <div class="container">
+    <div class="card">
+      <h2>Create Post</h2>
+        <%= form_with model: @post do |form|%>
+          <div data-controller="image">
+            <div class="imgBg">
+              <%= image_tag("", data: { target: "image.output" }) %>
+            </div>
+            <div>
+              <%= form.file_field :images, multiple: true, class: "input_teg", data: {target: "image.input", action: "image#readURL" } %>
+            </div>
+            <br>
+            <div>
+              <%= form.text_area :desc, class: "input_teg", placeholder: "Add Description" %>
+            </div>
+          </div>
+          <%= form.hidden_field :user_id, value: current_user.id %>
+          <%= form.submit "Create post", class: "btn"%>
+        <% end %>
+    </div>
+  </div>
+</body>
+</html>
