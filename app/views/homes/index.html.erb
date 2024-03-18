@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instagram Post Card Clone</title>
      <%= stylesheet_link_tag :home %>
 </head>
+
+<%= button_to 'Log-Out',destroy_user_session_path, method: :delete %>
 
 <body>
   <div class="container">
@@ -17,18 +12,17 @@
           <div class="top">
               <div class="userDeatils">
                   <div class="profileImg">
-                      <%= image_tag 'default-user.png', class: "cover" %>
+                      <%#= image_tag user_image_url(post.user), class: "cover" %>
+                      <%= image_tag user_image_url(post.user.profile), class: "cover"%>
                   </div>
-                  <h3><%= post.user[:full_name] %></h3>
+                   <h3><%= post.user[:username] %></h3>
               </div>
               <div class="dot">
                   <%= image_tag 'more.png', class: "heart" %>
               </div>
           </div>
           <div class="imgBg">
-              <% post.images.each do |one| %>
-                <%= image_tag url_for(one), class: "cover"  %>
-              <% end %>
+              <%= image_tag post.image, class: "cover" if post.image.attached? %>
           </div>
           <div class="btns">
               <div class="left">
@@ -42,7 +36,7 @@
           </div>
           <h4 class="likes">5,489 likes</h4>
           <h4 class="message">
-              <b><%= post.user[:full_name] %></b>
+              <h3><%= post.user[:username] %></h3>
               <%= post.desc %>
               <br>
               <span>#ironman</span>
@@ -51,7 +45,7 @@
           <h4 class="comments">View all 546 comments</h4>
           <div class="addComments">
               <div class="userImg">
-                <%= image_tag 'default-user.png', class: "cover" %>
+                 <%= image_tag user_image_url(post.user.profile), class: "cover"%>
               </div>
               <input type="text" class="text" placeholder="Add a comment...">
           </div>
@@ -65,9 +59,9 @@
         <div class="top">
             <div class="userDeatils">
                 <div class="profileImg">
-                    <%= image_tag 'default-user.png', class: "cover" %>
+                     <%= image_tag user_image_url(current_user.profile), class: "cover"  %>
                 </div>
-                <p><%= current_user.full_name %></p>
+                <p><%= current_user.username %></p>
             </div>
             <h5>Suggestions for you</h5>
             <div class="userDeatils">
@@ -134,5 +128,4 @@
 </body>
 
 </html>
-<%= button_to 'Log-Out',destroy_user_session_path, method: :delete %>
 

@@ -2,9 +2,6 @@
 <html lang="en">
   <head>
     <title>Instagram Clone</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="assets/favicon.svg" type="image/x-icon" />
     <%= stylesheet_link_tag :style %>
     <script src="script.js" defer></script>
   </head>
@@ -54,13 +51,14 @@
           <a href="#">
             <%= image_tag 'heart.svg' %>
           </a>
-          
-          <button class="profile-button">
-            <div class="profile-button__border"></div>
-            <div class="profile-button__picture">
-              <%= image_tag 'default-user.png'%>
-            </div>
-          </button>
+          <a href="<%= profiles_path %>">
+            <button class="profile-button">
+              <div class="profile-button__border"></div>
+              <div class="profile-button__picture">
+                <%= image_tag user_image_url(current_user.profile) %>  
+              </div>
+            </button>
+           </a>
         </div>
       </nav>
     </header>

@@ -1,0 +1,59 @@
+<div class="card mb-3">
+    <div class="card-body">
+        <div class="pt-4 pb-2">
+            <h5 class="card-title text-center pb-0 fs-4">Create profile</h5>
+        </div>
+        <div class='col-sm-12 row'>
+            <div class='col-sm-1 row'></div>
+            <div class='form-group col-sm-5 row'>
+                <b><%#= profile.user.email %></b>
+            </div>
+        </div><br>
+        <div class='flex-auto p-2'>
+            <%= form_for @profile do |form| %>
+                <div class='col-sm-12 row'>
+                    <div class='col-sm-1 row'></div>
+                    <div class='form-group col-sm-5 row'>
+                        <%#= form.hidden_field :user_id, value:  profile.user.id %>
+                        <b><%= form.label :full_name %></b>
+                        <%= form.text_field :full_name, class: 'form-control', placeholder: 'enter a first name' %>
+                    </div>
+                    <div class='col-sm-1 row'></div>
+                    <div class='form-group col-sm-5 row'>
+                        <b><%= form.label :bio %></b>
+                        <%= form.text_area :bio, class: 'form-control', placeholder: 'enter a last name' %>
+                    </div>
+                </div><br>
+                <div class='col-sm-12 row'>
+                    <div class='col-sm-1 row'></div>
+                    <div class='form-group col-sm-5 row'>
+                        <b><%= form.label :phone_number %></b>
+                        <%= form.text_field :phone_number, class: 'form-control', placeholder: 'enter a phone no.' %>
+                    </div>
+                </div><br>
+                <div class='col-sm-12 row'>
+                    <div class='col-sm-1 row'></div>
+                    <div class='form-group col-sm-5 row'>
+                        <b><%= form.label :dob %></b>
+                        <%= form.date_field :dob, class: 'form-control', placeholder: 'enter a employee_id' %>
+                    </div>
+                    <div class='col-sm-1 row'></div>
+                    <div class='form-group col-sm-5 row'>
+                        <b><%= form.label :gender %></b>
+                        <%= form.select :gender, Profile.genders.keys.map { |gender| [gender.humanize, gender] }, {class: 'form-control'} %>
+                    </div>
+                </div><br>
+                <div class='col-sm-12 row'>
+                    <div class='col-sm-1 row'></div>
+                    <div class='form-group col-sm-5 row'>
+                        <b><%= form.label :profile_image %></b>
+                        <%= form.file_field :profile_image, class: 'form-control', placeholder: 'enter a linkedin url' %>
+                    </div>
+                </div><br>
+                <div class="text-center">
+                    <%= form.submit 'Save Profile', class: 'btn btn-primary' %>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>

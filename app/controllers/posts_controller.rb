@@ -9,7 +9,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-
+    # debugger
     if @post.save
       redirect_to root_path
     else
@@ -20,7 +20,7 @@ class PostsController < ApplicationController
   private
   
   def post_params
-    params.required(:post).permit(:desc, :user_id, images: [])
+    params.required(:post).permit(:desc, :user_id, :image )
   end
 end
 
