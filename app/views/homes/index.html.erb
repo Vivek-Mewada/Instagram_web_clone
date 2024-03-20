@@ -5,110 +5,119 @@
 <%= button_to 'Log-Out',destroy_user_session_path, method: :delete %>
 
 <body>
-  <div class="container">
-    <div class="all-card">
-      <% @posts.each do |post| %>
-      <div class="card">
-          <div class="top">
-              <div class="userDeatils">
-                  <div class="profileImg">
-                      <%#= image_tag user_image_url(post.user), class: "cover" %>
-                      <%= image_tag user_image_url(post.user.profile), class: "cover"%>
-                  </div>
-                   <h3><%= post.user[:username] %></h3>
-              </div>
-              <div class="dot">
-                  <%= image_tag 'more.png', class: "heart" %>
-              </div>
-          </div>
-          <div class="imgBg">
-              <%= image_tag post.image, class: "cover" if post.image.attached? %>
-          </div>
-          <div class="btns">
-              <div class="left">
-                  <%= image_tag 'heart.svg', class: "heart" %>
-                  <%= image_tag 'comment.svg', class: "heart" %>
-                  <%= image_tag 'share.svg', class: "heart" %>
-              </div>
-              <div class="right">
-                  <%= image_tag 'bookmark.svg', class: "heart" %>
-              </div>
-          </div>
-          <h4 class="likes">5,489 likes</h4>
-          <h4 class="message">
-              <h3><%= post.user[:username] %></h3>
-              <%= post.desc %>
-              <br>
-              <span>#ironman</span>
-              <span>#captainamerica</span>
-          </h4>
-          <h4 class="comments">View all 546 comments</h4>
-          <div class="addComments">
-              <div class="userImg">
-                 <%= image_tag user_image_url(post.user.profile), class: "cover"%>
-              </div>
-              <input type="text" class="text" placeholder="Add a comment...">
-          </div>
-          <h5 class="postTime">5 hours ago</h5>
-      </div>
-      <% end %>
-    </div>
+    <div class="container">
+        <div class="all-card">
+            <% @posts.each do |post| %>
+                <div class="card" data-controller="like"
+                        data-like-user-id-value="<%= current_user.id %>" data-like-likeable-id-value="<%= post.id %>" data-like-likeable-type-value= "<%= post.class %>" >
+                    <div class="top">
+                        <div class="userDeatils">
+                            <div class="profileImg">
+                                <%#= image_tag user_image_url(post.user), class: "cover" %>
+                                <%= image_tag user_image_url(post.user.profile), class: "cover"%>
+                            </div>
+                            <h3><%= post.user[:username] %></h3>
+                        </div>
+                        <div class="dot">
+                            <%= image_tag 'more.png', class: "heart" %>
+                        </div>
+                    </div>
+                    <div class="imgBg">
+                        <%= image_tag post.image, class: "cover" if post.image.attached? %>
+                    </div>
+                    <div class="btns">
+                        <div class="left">
+                            <%#= image_tag 'heart.svg', class: "heart" %>
+                            <div>
+                                    <%= image_tag  "#{ exist_like_or_not(post.id, 'Post') ? 'like-image.png' : 'heart.svg' }", data: { action: "click->like#onClicked", like_target: 'likeImage' } %>
+                                    <%= image_tag 'comment.svg', class: "heart" %>
+                                    <%= image_tag 'share.svg', class: "heart" %>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <%= image_tag 'bookmark.svg', class: "heart" %>
+                        </div>
+                    </div>
+                    
+                    <%#= turbo_stream_from 'likes_count' %>
+                    <div id = 'likes_count'>
+                        <div class="likes" data-like-target='Count'><%= post.likes.count %> likes</div> 
+                    </div>
 
-    <div class="sidebar">
-      <div>
-        <div class="top">
-            <div class="userDeatils">
-                <div class="profileImg">
-                     <%= image_tag user_image_url(current_user.profile), class: "cover"  %>
+                    <h4 class="message">
+                        <h3><%= post.user[:username] %></h3>
+                        <%= post.desc %>
+                        <br>
+                        <span>#ironman</span>
+                        <span>#captainamerica</span>
+                    </h4>
+                    <h4 class="comments">View all 546 comments</h4>
+                    <div class="addComments">
+                        <div class="userImg">
+                            <%= image_tag user_image_url(post.user.profile), class: "cover"%>
+                        </div>
+                        <input type="text" class="text" placeholder="Add a comment...">
+                    </div>
+                    <h5 class="postTime">5 hours ago</h5>
                 </div>
-                <p><%= current_user.username %></p>
-            </div>
-            <h5>Suggestions for you</h5>
-            <div class="userDeatils">
-                <div class="profileImg">
-                    <%= image_tag 'default-user.png', class: "cover" %>
-                </div>
-                <p>Nikhil Kumar<br><span>Web Designer</span></p>
-            </div>
+            <% end %>
+        </div>
 
-            <div class="userDeatils">
-                <div class="profileImg">
-                    <%= image_tag 'default-user.png', class: "cover" %>
+        <div class="sidebar">
+        <div>
+            <div class="top">
+                <div class="userDeatils">
+                    <div class="profileImg">
+                        <%= image_tag user_image_url(current_user.profile), class: "cover"  %>
+                    </div>
+                    <p><%= current_user.username %></p>
                 </div>
-                <p>Nikhil Kumar<br><span>Web Designer</span></p>
-            </div>
+                <h5>Suggestions for you</h5>
+                <div class="userDeatils">
+                    <div class="profileImg">
+                        <%= image_tag 'default-user.png', class: "cover" %>
+                    </div>
+                    <p>Nikhil Kumar<br><span>Web Designer</span></p>
+                </div>
 
-            <div class="userDeatils">
-                <div class="profileImg">
-                    <%= image_tag 'default-user.png', class: "cover" %>
+                <div class="userDeatils">
+                    <div class="profileImg">
+                        <%= image_tag 'default-user.png', class: "cover" %>
+                    </div>
+                    <p>Nikhil Kumar<br><span>Web Designer</span></p>
                 </div>
-                <p>Nikhil Kumar<br><span>Web Designer</span></p>
-            </div>
 
-            <div class="userDeatils">
-                <div class="profileImg">
-                    <%= image_tag 'default-user.png', class: "cover" %>
+                <div class="userDeatils">
+                    <div class="profileImg">
+                        <%= image_tag 'default-user.png', class: "cover" %>
+                    </div>
+                    <p>Nikhil Kumar<br><span>Web Designer</span></p>
                 </div>
-                <p>Nikhil Kumar<br><span>Web Designer</span></p>
-            </div>
 
-            <div class="userDeatils">
-                <div class="profileImg">
-                    <%= image_tag 'default-user.png', class: "cover" %>
+                <div class="userDeatils">
+                    <div class="profileImg">
+                        <%= image_tag 'default-user.png', class: "cover" %>
+                    </div>
+                    <p>Nikhil Kumar<br><span>Web Designer</span></p>
                 </div>
-                <p>Nikhil Kumar<br><span>Web Designer</span></p>
-            </div>
 
-            <div class="userDeatils">
-                <div class="profileImg">
-                    <%= image_tag 'default-user.png', class: "cover" %>
+                <div class="userDeatils">
+                    <div class="profileImg">
+                        <%= image_tag 'default-user.png', class: "cover" %>
+                    </div>
+                    <p>Nikhil Kumar<br><span>Web Designer</span></p>
                 </div>
-                <p>Nikhil Kumar<br><span>Web Designer</span></p>
+
+                <div class="userDeatils">
+                    <div class="profileImg">
+                        <%= image_tag 'default-user.png', class: "cover" %>
+                    </div>
+                    <p>Nikhil Kumar<br><span>Web Designer</span></p>
+                </div>
             </div>
         </div>
+        </div>
     </div>
-    </div>
-  </div>
 
 
     <script>
