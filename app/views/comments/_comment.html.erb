@@ -1,0 +1,23 @@
+<div class="top1" style="margin: 5px 0 5px 0;">
+<div class="userDeatils1" >
+    <div class = 'left' >
+        <div class="profileImg1">
+            <%= image_tag user_image_url(comment.user.profile), class: "cover" %>
+        </div>
+        <div>
+            <P> 
+                <b><%= comment.user.username %></b><br>
+                   <%= comment.body %>
+            </P>
+        </div>
+    </div>
+    <div class='right'>
+        <div class='comment-btns'>
+            <%#= link_to new_post_comment_path(post) , data: {turbo_stream: :true} do %>
+                <%= image_tag "comment.svg" %>
+            <%# end %>
+            <%= image_tag "heart.svg" %>
+        </div>
+    </div>
+</div>
+</div>

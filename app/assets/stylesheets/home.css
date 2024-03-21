@@ -29,8 +29,23 @@
     justify-content: space-between;
     align-items: center;
 }
+
+/* .card .top1{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+} */
+.left{
+    display: flex;
+}
 .card .top .userDeatils{
     display: flex;
+    align-items: center;
+}
+.card .top1 .userDeatils1{
+    display: flex;
+    justify-content: space-between;
+    /* display: flex; */
     align-items: center;
 }
 .card .top .userDeatils .profileImg{
@@ -41,6 +56,17 @@
     margin-right: 8px;
     overflow: hidden;
 }
+
+.card .top1 .userDeatils1 .profileImg1{
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 8px;
+    overflow: hidden;
+}
+
+
 .cover{
     position: absolute;
     top: 0;

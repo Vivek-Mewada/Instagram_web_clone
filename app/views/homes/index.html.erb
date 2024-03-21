@@ -8,7 +8,7 @@
     <div class="container">
         <div class="all-card">
             <% @posts.each do |post| %>
-                <div class="card" data-controller="like"
+                <div class="card" data-controller="like" 
                         data-like-user-id-value="<%= current_user.id %>" data-like-likeable-id-value="<%= post.id %>" data-like-likeable-type-value= "<%= post.class %>" >
                     <div class="top">
                         <div class="userDeatils">
@@ -28,9 +28,12 @@
                     <div class="btns">
                         <div class="left">
                             <%#= image_tag 'heart.svg', class: "heart" %>
-                            <div>
+                            <div data-controller="comment" 
+                                data-comment-user-id-value="<%= current_user.id %>" data-comment-commentable-id-value="<%= post.id %>" data-comment-commentable-type-value= "<%= post.class %>" >
                                     <%= image_tag  "#{ exist_like_or_not(post.id, 'Post') ? 'like-image.png' : 'heart.svg' }", data: { action: "click->like#onClicked", like_target: 'likeImage' } %>
-                                    <%= image_tag 'comment.svg', class: "heart" %>
+                                    <%= link_to new_comment_path(post: post) , data: {turbo_stream: :true} do %>
+                                        <%= image_tag "comment.svg" %>
+                                    <% end %>
                                     <%= image_tag 'share.svg', class: "heart" %>
                             </div>
                         </div>
@@ -45,20 +48,27 @@
                     </div>
 
                     <h4 class="message">
-                        <h3><%= post.user[:username] %></h3>
-                        <%= post.desc %>
-                        <br>
-                        <span>#ironman</span>
-                        <span>#captainamerica</span>
-                    </h4>
-                    <h4 class="comments">View all 546 comments</h4>
+                        <b><h3><%= post.user[:username] %></h3></b>
+                        <p>
+                            <%= post.desc %>
+                        </p>
+                    </h4><br>
+                    <a>
+                        <%= post.comments.count %> Comments
+                    </a>
+                    <br>
+
+                    <%= render post.comments %>
+                    <%= turbo_frame_tag "#{post.id}_comment" %> 
+
+                  
+
                     <div class="addComments">
                         <div class="userImg">
                             <%= image_tag user_image_url(post.user.profile), class: "cover"%>
                         </div>
-                        <input type="text" class="text" placeholder="Add a comment...">
+                        <%= turbo_frame_tag dom_id(post)%> 
                     </div>
-                    <h5 class="postTime">5 hours ago</h5>
                 </div>
             <% end %>
         </div>

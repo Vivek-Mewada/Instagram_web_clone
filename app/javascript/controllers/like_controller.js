@@ -28,7 +28,7 @@ export default class extends Controller {
           .then(async response => {
             const result = await response.json();
             console.log('Response:', result);
-            debugger
+            // debugger
             if (result['like']) {
               // const divEle = document.querySelectorAll(`[data-like-likeable-id-value="${result['likeable_id']}"]`);
               // const image = divEle.querySelector('img.like-image');
@@ -47,7 +47,6 @@ export default class extends Controller {
                 // const image = divEle.querySelector('img.like-image');
                 targetImg.setAttribute("src", "/assets/heart.svg");
                 likeCount.innerHTML = `${result.count} likes`
-
             }
             // handle succ  zess response
           })
