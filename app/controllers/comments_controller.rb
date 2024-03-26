@@ -3,18 +3,17 @@ class CommentsController < ApplicationController
 
     def show
       @comments = Comment.all
-      # @comment = Comment.where(commentable_id: params[:id], commentable_type: 'Post')
-     
     end
-
-    def new
-      # debugger
-      @post = Post.find_by(id: params[:post])
-      @comment = @post.comments.build
-    end
+    
+    # def new
+    #   @post = Post.find_by(id: params[:post])
+    #   @comment = @post.comments.build
+    #   @nested_comments = Comment.build(commentable_id: @comment[:id], commentable_type: 'Comment')
+    #   debugger
+      # @comment = Comment.new
+    # end
 
     def create
-      @post = Post.find_by(id: params[:post_id])
       @comment = Comment.new(comment_params)
       # debugger
       @comment.save

@@ -65,3 +65,9 @@
   .imgBg img{
     border-radius: 10px;
   }
+
+  .imgBg video{
+    border-radius: 10px;
+    width: inherit;
+    height: initial;
+  }

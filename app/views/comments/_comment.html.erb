@@ -6,18 +6,41 @@
         </div>
         <div>
             <P> 
-                <b><%= comment.user.username %></b><br>
+                <b><%= comment.user.username %></b>
+                <br>
                    <%= comment.body %>
             </P>
         </div>
     </div>
     <div class='right'>
         <div class='comment-btns'>
-            <%#= link_to new_post_comment_path(post) , data: {turbo_stream: :true} do %>
+            <%= link_to new_comment_path(comment: comment) , data: {turbo_stream: :true} do %>
                 <%= image_tag "comment.svg" %>
-            <%# end %>
+            <% end %>
             <%= image_tag "heart.svg" %>
         </div>
+
+
+
+        <div class='left1'>
+            <% comment.nested_comments.each do |nested_comment| %>
+                <%# <div class="left" > %>
+                    <div class="profileImg1">
+                        <%= image_tag user_image_url(nested_comment.user.profile), class: "cover" %>
+                    </div>
+                    <div>
+                        <p>
+                            <b><%= nested_comment.user.username %></b><br>
+                            <%= nested_comment.body%><br>
+                        </p>
+                    </div>
+                <%# <div> %>
+            <% end %>
+            <%#= render @nested_comment.comments %> 
+            <%= render "comments/form", comment: comment.nested_comments.build %>
+            <%#= turbo_frame_tag "#{comment.id}_nested_comment"  %>
+            <%#= turbo_frame_tag dom_id(nested_comment)%>
+    </div>
     </div>
 </div>
 </div>

@@ -19,19 +19,14 @@
             <div class="desktop-only">
               <div class="details row">
                 <ul>
-                  <li><span>722</span> posts</li>
-                  <li><span>25.1m</span> followers</li>
-                  <li><span>6</span> following</li>
+                  <li><span>0</span> posts</li>
+                  <li><span>18m</span> followers</li>
+                  <li><span>18</span> following</li>
                 </ul>
               </div>
               <div class="descriptions row last">
                 <h2><%= current_user.full_name  %></h2>
-                <h1>apple</h1>
-                <span>
-                  Everyone has a story to tell.
-                  <br />
-                  Tag <a>#ShotoniPhone</a> to take part.
-                </span>
+                <h1><%= current_user.profile.bio %></h1>
               </div>
             </div>
           </div>

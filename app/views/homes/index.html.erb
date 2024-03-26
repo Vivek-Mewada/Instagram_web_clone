@@ -1,5 +1,5 @@
 <head>
-     <%= stylesheet_link_tag :home %>
+    <%= stylesheet_link_tag :home %>
 </head>
 
 <%= button_to 'Log-Out',destroy_user_session_path, method: :delete %>
@@ -57,17 +57,18 @@
                         <%= post.comments.count %> Comments
                     </a>
                     <br>
-
-                    <%= render post.comments %>
+                
+                    <%= render post.comments %> 
                     <%= turbo_frame_tag "#{post.id}_comment" %> 
-
-                  
 
                     <div class="addComments">
                         <div class="userImg">
                             <%= image_tag user_image_url(post.user.profile), class: "cover"%>
                         </div>
-                        <%= turbo_frame_tag dom_id(post)%> 
+                        <div id='my_form'>
+                            <%= render 'comments/form', comment: post.comments.build %>
+                        </div>
+                        <%#= turbo_frame_tag dom_id(post)%> 
                     </div>
                 </div>
             <% end %>
@@ -76,75 +77,27 @@
         <div class="sidebar">
         <div>
             <div class="top">
-                <div class="userDeatils">
-                    <div class="profileImg">
-                        <%= image_tag user_image_url(current_user.profile), class: "cover"  %>
+                <a href = "<%= profiles_path %>">
+                    <div class="userDeatils">
+                        <div class="profileImg">
+                            <%= image_tag user_image_url(current_user.profile), class: "cover"  %>
+                        </div>
+                        <p><%= current_user.username %></p>
                     </div>
-                    <p><%= current_user.username %></p>
-                </div>
+                </a>
                 <h5>Suggestions for you</h5>
-                <div class="userDeatils">
-                    <div class="profileImg">
-                        <%= image_tag 'default-user.png', class: "cover" %>
-                    </div>
-                    <p>Nikhil Kumar<br><span>Web Designer</span></p>
-                </div>
-
-                <div class="userDeatils">
-                    <div class="profileImg">
-                        <%= image_tag 'default-user.png', class: "cover" %>
-                    </div>
-                    <p>Nikhil Kumar<br><span>Web Designer</span></p>
-                </div>
-
-                <div class="userDeatils">
-                    <div class="profileImg">
-                        <%= image_tag 'default-user.png', class: "cover" %>
-                    </div>
-                    <p>Nikhil Kumar<br><span>Web Designer</span></p>
-                </div>
-
-                <div class="userDeatils">
-                    <div class="profileImg">
-                        <%= image_tag 'default-user.png', class: "cover" %>
-                    </div>
-                    <p>Nikhil Kumar<br><span>Web Designer</span></p>
-                </div>
-
-                <div class="userDeatils">
-                    <div class="profileImg">
-                        <%= image_tag 'default-user.png', class: "cover" %>
-                    </div>
-                    <p>Nikhil Kumar<br><span>Web Designer</span></p>
-                </div>
-
-                <div class="userDeatils">
-                    <div class="profileImg">
-                        <%= image_tag 'default-user.png', class: "cover" %>
-                    </div>
-                    <p>Nikhil Kumar<br><span>Web Designer</span></p>
-                </div>
+                <% User.all.each do |user| %>
+                        <div class="userDeatils">
+                            <div class="profileImg">
+                                <%= image_tag user_image_url(user.profile), class: "cover" %>
+                            </div>
+                            <p><%= user.username %><br><span><%= user.profile.bio %></span></p>
+                        </div>
+                <% end %>
             </div>
         </div>
         </div>
     </div>
-
-
-    <script>
-                function likeButton(){
-            let heart = document.querySelector('.heart');
-            let likes = document.querySelector('.likes');
-            if(heart.src.match("heart.png")){
-                heart.src = "heart_red.png";
-                likes.innerHTML = "5,490 likes";
-            } else {
-                heart.src = "heart.png";
-                likes.innerHTML = "5,489 likes"
-            }
-        }
-    </script>
-
 </body>
-
 </html>
 

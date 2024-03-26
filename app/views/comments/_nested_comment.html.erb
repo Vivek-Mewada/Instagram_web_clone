@@ -1,0 +1,16 @@
+<div class="top1" style="margin: 5px 0 5px 0;">
+<div class="userDeatils1" >
+    <div class = 'left' >
+        <div class="profileImg1">
+            <%= image_tag user_image_url(nested_comment.user.profile), class: "cover" %>
+        </div>
+        <div>
+            <P> 
+                <b><%= nested_comment.user.username %></b>
+                <br>
+                   <%= nested_comment.body %>
+            </P>
+        </div>
+    </div>
+</div>
+</div>

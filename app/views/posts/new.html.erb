@@ -13,6 +13,7 @@
           <div data-controller="image">
             <div class="imgBg">
               <%= image_tag("", data: { target: "image.output" }) %>
+              <%#= video_tag("", data: { target: "image.output" }) %>
             </div>
             <div>
               <%= form.file_field :image, class: "input_teg", data: {target: "image.input", action: "image#readURL" } %>

@@ -1,11 +1,9 @@
-<div id="form_id">
-    <%= form_for comment do |form| %>
-
+<turbo-frame id='form_id'>
+    <%= form_with model: comment, data: { controller: :form, action: "turbo:submit-end->form#clear" } do |form| %>
         <%= form.hidden_field :commentable_id %>
         <%= form.hidden_field :commentable_type %>
         <%= form.hidden_field :user_id, value: current_user.id %>
         <%= form.text_field :body, placeholder: "Add a comment..." %>
         <%= form.submit %>
-
     <% end %>
-</div>
+</turbo-frame>
