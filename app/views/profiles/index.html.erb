@@ -20,8 +20,8 @@
               <div class="details row">
                 <ul>
                   <li><span>0</span> posts</li>
-                  <li><span>18m</span> followers</li>
-                  <li><span>18</span> following</li>
+                  <li><span>0</span> followers</li>
+                  <li><span>0</span> following</li>
                 </ul>
               </div>
               <div class="descriptions row last">
@@ -174,7 +174,11 @@
       <div class="gallery">
         <% @current_user_posts.each do |post| %>
           <div class="gallery-item">
-           <%= image_tag post.image, alt: "profile" %>
+              <% if post.image.content_type == 'image/jpeg' %>
+                  <%= image_tag post.image, alt: "profile" %>
+              <% else %>
+                  <%= video_tag post.image, alt: "profile", controls: true  %>
+              <% end %>
             <span class="media-icon"></span>
           </div>
         <% end %>

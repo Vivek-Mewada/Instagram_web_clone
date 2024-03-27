@@ -22,54 +22,106 @@
                             <%= image_tag 'more.png', class: "heart" %>
                         </div>
                     </div>
-                    <div class="imgBg">
-                        <%= image_tag post.image, class: "cover" if post.image.attached? %>
-                    </div>
-                    <div class="btns">
-                        <div class="left">
-                            <%#= image_tag 'heart.svg', class: "heart" %>
-                            <div data-controller="comment" 
-                                data-comment-user-id-value="<%= current_user.id %>" data-comment-commentable-id-value="<%= post.id %>" data-comment-commentable-type-value= "<%= post.class %>" >
-                                    <%= image_tag  "#{ exist_like_or_not(post.id, 'Post') ? 'like-image.png' : 'heart.svg' }", data: { action: "click->like#onClicked", like_target: 'likeImage' } %>
-                                    <%= link_to new_comment_path(post: post) , data: {turbo_stream: :true} do %>
-                                        <%= image_tag "comment.svg" %>
-                                    <% end %>
-                                    <%= image_tag 'share.svg', class: "heart" %>
+                        <% if post.image.attached? %>
+                            <% if post.image.content_type.include?("image") %>
+                                <div class="imgBg">
+                                    <%= image_tag post.image , class: "cover"%>
+                                </div>
+                                <div class="btns ">
+                                    <div class="left">
+                                        <div data-controller="comment" 
+                                            data-comment-user-id-value="<%= current_user.id %>" data-comment-commentable-id-value="<%= post.id %>" data-comment-commentable-type-value= "<%= post.class %>" >
+                                                <%= image_tag  "#{ exist_like_or_not(post.id, 'Post') ? 'like-image.png' : 'heart.svg' }", data: { action: "click->like#onClicked", like_target: 'likeImage' } %>
+                                                <%= link_to new_comment_path(post: post) , data: {turbo_stream: :true} do %>
+                                                    <%= image_tag "comment.svg" %>
+                                                <% end %>
+                                                <%= image_tag 'share.svg', class: "heart" %>
+                                        </div>
+                                    </div>
+                                    <div class="right">
+                                        <%= image_tag 'bookmark.svg', class: "heart" %>
+                                    </div>
+                                </div>
+                                            
+                                <%#= turbo_stream_from 'likes_count' %>
+                                <div id = 'likes_count'>
+                                    <div class="likes" data-like-target='Count'><%= post.likes.count %> likes</div> 
+                                </div>
+
+                                <h4 class="message">
+                                    <b><h3><%= post.user[:username] %></h3></b>
+                                    <p>
+                                        <%= post.desc %>
+                                    </p>
+                                </h4><br>
+
+                                <a>
+                                    <%= post.comments.count %> Comments
+                                </a><br>
+
+                                <%= render post.comments %> 
+                                <%= turbo_frame_tag "#{post.id}_comment" %> 
+
+                                <div class="addComments">
+                                    <div class="userImg">
+                                        <%= image_tag user_image_url(post.user.profile), class: "cover"%>
+                                    </div>
+                                    <div id='my_form'>
+                                        <%= render 'comments/form', comment: post.comments.build %>
+                                    </div>
+                                    <%#= turbo_frame_tag dom_id(post)%> 
+                                </div>
+                            <% else %>
+                            <div class="imgBg">
+                                <%= video_tag post.image, controls: true %>
                             </div>
-                        </div>
-                        <div class="right">
-                            <%= image_tag 'bookmark.svg', class: "heart" %>
-                        </div>
-                    </div>
-                    
-                    <%#= turbo_stream_from 'likes_count' %>
-                    <div id = 'likes_count'>
-                        <div class="likes" data-like-target='Count'><%= post.likes.count %> likes</div> 
-                    </div>
+                            <div class="btns ">
+                                    <div class="left">
+                                        <div data-controller="comment" 
+                                            data-comment-user-id-value="<%= current_user.id %>" data-comment-commentable-id-value="<%= post.id %>" data-comment-commentable-type-value= "<%= post.class %>" >
+                                                <%= image_tag  "#{ exist_like_or_not(post.id, 'Post') ? 'like-image.png' : 'heart.svg' }", data: { action: "click->like#onClicked", like_target: 'likeImage' } %>
+                                                <%= link_to new_comment_path(post: post) , data: {turbo_stream: :true} do %>
+                                                    <%= image_tag "comment.svg" %>
+                                                <% end %>
+                                                <%= image_tag 'share.svg', class: "heart" %>
+                                        </div>
+                                    </div>
+                                    <div class="right">
+                                        <%= image_tag 'bookmark.svg', class: "heart" %>
+                                    </div>
+                                </div>
+                                            
+                                <%#= turbo_stream_from 'likes_count' %>
+                                <div id = 'likes_count'>
+                                    <div class="likes" data-like-target='Count'><%= post.likes.count %> likes</div> 
+                                </div>
 
-                    <h4 class="message">
-                        <b><h3><%= post.user[:username] %></h3></b>
-                        <p>
-                            <%= post.desc %>
-                        </p>
-                    </h4><br>
-                    <a>
-                        <%= post.comments.count %> Comments
-                    </a>
-                    <br>
-                
-                    <%= render post.comments %> 
-                    <%= turbo_frame_tag "#{post.id}_comment" %> 
+                                <h4 class="message">
+                                    <b><h3><%= post.user[:username] %></h3></b>
+                                    <p>
+                                        <%= post.desc %>
+                                    </p>
+                                </h4><br>
 
-                    <div class="addComments">
-                        <div class="userImg">
-                            <%= image_tag user_image_url(post.user.profile), class: "cover"%>
-                        </div>
-                        <div id='my_form'>
-                            <%= render 'comments/form', comment: post.comments.build %>
-                        </div>
-                        <%#= turbo_frame_tag dom_id(post)%> 
-                    </div>
+                                <a>
+                                    <%= post.comments.count %> Comments
+                                </a><br>
+
+                                <%= render post.comments %> 
+                                <%= turbo_frame_tag "#{post.id}_comment" %> 
+
+                                <div class="addComments">
+                                    <div class="userImg">
+                                        <%= image_tag user_image_url(post.user.profile), class: "cover"%>
+                                    </div>
+                                    <div id='my_form'>
+                                        <%= render 'comments/form', comment: post.comments.build %>
+                                    </div>
+                                    <%#= turbo_frame_tag dom_id(post)%> 
+                            </div>
+                            <% end %>
+                        <% end %>
+                   
                 </div>
             <% end %>
         </div>
@@ -99,5 +151,4 @@
         </div>
     </div>
 </body>
-</html>
 

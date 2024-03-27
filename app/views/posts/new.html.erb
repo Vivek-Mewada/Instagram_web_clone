@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-     <%= stylesheet_link_tag :post %>
-</head>
-
 <body>
   <div class="container">
     <div class="card">
@@ -12,11 +5,11 @@
         <%= form_with model: @post do |form|%>
           <div data-controller="image">
             <div class="imgBg">
-              <%= image_tag("", data: { target: "image.output" }) %>
-              <%#= video_tag("", data: { target: "image.output" }) %>
+              <%# <img id="demo_image" onchange="changeImage(this)" data-target="image.output"> %>
             </div>
             <div>
-              <%= form.file_field :image, class: "input_teg", data: {target: "image.input", action: "image#readURL" } %>
+              <%#= form.file_field :image, id: 'upload_file',class: "input_teg", data: {target: "image.input", action: "onChanged->image#readURL" } , onchange: 'uploadFile()' %>
+              <%= form.file_field :image, id: 'upload_file',class: "input_teg", data: {target: "image.input", action: "change->image#readURL" }  %>
             </div>
             <br>
             <div>
@@ -29,4 +22,35 @@
     </div>
   </div>
 </body>
-</html>
+
+
+
+
+<script>
+
+// function uploadFile(){
+  // document.getElementsByClassName('imgBg')[0].innerHTML = `<video src='${(window.URL ? URL : webkitURL).createObjectURL(document.getElementById("upload_file").files[0])}'/>`
+// }
+
+//   if (image.getAttribute("type") == "video/mp4") {
+//       // Create a new video element
+//       var video = document.createElement("video");
+      
+//       // Set the src attribute to the image's src
+//       // video.src = ;
+      
+//       // Set other attributes like controls, autoplay, etc., as needed
+//       video.controls = true;
+      
+//       // Replace the image with the video element
+//       image.parentNode.replaceChild(video, image);
+//   }
+// }
+// debugger
+// image.change(function(){
+
+//   // Check if the type attribute is "video/mp4"
+//     debugger
+
+// });
+ </script> 

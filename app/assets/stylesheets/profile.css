@@ -300,6 +300,12 @@ header {
   width: 100%;
   display: block;
 }
+
+.gallery-item video {
+  width: 100%;
+  display: block;
+}
+
 .gallery-item .media-icon {
   position: absolute;
   top: 0px;
