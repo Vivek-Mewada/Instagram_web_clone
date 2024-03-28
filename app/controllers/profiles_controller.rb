@@ -1,4 +1,8 @@
 class ProfilesController < ApplicationController
+  def show
+    # debugger
+    @user = User.find_by(id: params[:id])
+  end
   def index
     @current_user_posts = current_user.posts
   end

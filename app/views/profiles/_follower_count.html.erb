@@ -1,1 +1,7 @@
-<div><%= pluralize(current_user.followers.count, 'follower') %></div>
+<div>
+    <% if user == current_user %>
+        <%= pluralize(current_user.followers.count, 'follower') %>
+    <% else %>
+        <%= pluralize(user.followers.count, 'follower') %>
+    <% end %>
+</div>

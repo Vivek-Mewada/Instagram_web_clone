@@ -145,11 +145,11 @@
                                 <div class="profileImg">
                                     <%= image_tag user_image_url(user.profile), class: "cover" %>
                                 </div>
-                                <p><%= user.username %><br><span><%= user.profile.bio %></span></p>
+                                <a href='<%= profile_path(user.id)%>'><p><%= user.username %></a><br><span><%= user.profile.bio %></span></p>
                             </div>
                             <div class = "right">
                                 <h5><%#= button_to "Follow"%></h5>
-                                <%= user.id %>
+                                <%#= user.id %>
                                 <%= render 'homes/follow_button' , user: user %>
                             </div>
                         </div>
