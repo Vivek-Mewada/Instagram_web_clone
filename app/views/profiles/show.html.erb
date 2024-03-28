@@ -49,6 +49,8 @@
         </div>
       </header>
 
+<% if (@user.profile.status == "public" || current_user.followees.include?(@user)) %>
+
       <ul class="stories">
         <li class="story-item">
           <div class="image">
@@ -189,6 +191,8 @@
           </div>
         <% end %>
       </div>
+
+<% end %>
     </main>
   </body>
 </html>

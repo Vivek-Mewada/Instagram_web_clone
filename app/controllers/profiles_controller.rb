@@ -24,7 +24,7 @@ class ProfilesController < ApplicationController
 
   private
   def current_user_profile_params
-    params.require(:profile).permit(:full_name, :bio, :phone_number, :dob, :gender, :image )
+    params.require(:profile).permit(:full_name, :bio, :phone_number, :dob, :gender, :image , :status)
   end
   
 end

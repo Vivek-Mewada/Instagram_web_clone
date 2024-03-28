@@ -1,21 +1,17 @@
   <head>
     <%= stylesheet_link_tag :profile %>
   </head>
-
   <body>
     <main>
       <header>
         <div class="header-wrap">
           <div class="profile-pic">
             <%= image_tag user_image_url(current_user.profile), alt:"profile-logo" %>
-            <%#= image_tag user_image_url(current_user.profile) %>
           </div>
           <div class="profile-info">
             <div class="title row">
               <h2><%= current_user.username  %></h2>
               <span class="verfied-icon"></span>
-
-              <%# <button class="primary">Follow</button> %>
               <div class="primary">
                 <a href='<%= edit_profile_path(current_user.id)%>'>Edit-Profile </a>
               </div>
@@ -25,7 +21,6 @@
               <div class="details row">
                 <ul>
                   <li><span><%= current_user.posts.count %></span> posts</li>
-                  <%# <li><span>0</span> followers</li> %>
                   <li><span><%= render 'profiles/follower_count', user: @current_user %></li></span>
                   <li><span><%= current_user.followees.count %></span> following</li>
                 </ul>
@@ -121,9 +116,6 @@
         </button>
       </ul>
 
-    
-
-
       <div class="desktop-only">
         <div class="tabs">
           <div class="tab-item active" style="margin-right: 60px;">
@@ -176,7 +168,6 @@
         </div>
       </div>
       
-
       <div class="gallery">
         <% @current_user_posts.each do |post| %>
           <div class="gallery-item">
