@@ -1,0 +1,7 @@
+<div id=<%= dom_id(user) %>>
+    <% if current_user&.followees&.include?(user) %>
+        <%= button_to "Unfollow", homes_unfollow_path(id: user.id), method: :delete %>
+    <% else %>
+        <%= button_to "Follow", homes_follow_path(id: user.id) %>
+    <% end %>
+</div>

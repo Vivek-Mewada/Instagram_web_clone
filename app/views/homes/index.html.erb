@@ -139,12 +139,20 @@
                 </a>
                 <h5>Suggestions for you</h5>
                 <% User.all.each do |user| %>
-                        <div class="userDeatils">
-                            <div class="profileImg">
-                                <%= image_tag user_image_url(user.profile), class: "cover" %>
+                    <% if user != current_user %>
+                        <div class="userDeatils btns">
+                            <div class="left">
+                                <div class="profileImg">
+                                    <%= image_tag user_image_url(user.profile), class: "cover" %>
+                                </div>
+                                <p><%= user.username %><br><span><%= user.profile.bio %></span></p>
                             </div>
-                            <p><%= user.username %><br><span><%= user.profile.bio %></span></p>
+                            <div class = "right">
+                                <h5><%#= button_to "Follow"%></h5>
+                                <%= render 'homes/follow_button' , user: user %>
+                            </div>
                         </div>
+                        <% end %>
                 <% end %>
             </div>
         </div>

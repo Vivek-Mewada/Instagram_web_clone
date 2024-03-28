@@ -14,14 +14,20 @@
             <div class="title row">
               <h2><%= current_user.username  %></h2>
               <span class="verfied-icon"></span>
-              <button class="primary">Follow</button>
+
+              <%# <button class="primary">Follow</button> %>
+              <div class="primary">
+                <a href='<%= edit_profile_path(current_user.id)%>'>Edit-Profile </a>
+              </div>
+
             </div>
             <div class="desktop-only">
               <div class="details row">
                 <ul>
-                  <li><span>0</span> posts</li>
-                  <li><span>0</span> followers</li>
-                  <li><span>0</span> following</li>
+                  <li><span><%= current_user.posts.count %></span> posts</li>
+                  <%# <li><span>0</span> followers</li> %>
+                  <li><span><%= render 'profiles/follower_count', user: @current_user %></li></span>
+                  <li><span><%= current_user.followees.count %></span> following</li>
                 </ul>
               </div>
               <div class="descriptions row last">
@@ -115,7 +121,7 @@
         </button>
       </ul>
 
-    <a href='<%= edit_profile_path(current_user.id)%>'>Edit-Profile </a>
+    
 
 
       <div class="desktop-only">

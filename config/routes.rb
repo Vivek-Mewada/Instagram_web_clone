@@ -16,4 +16,8 @@ Rails.application.routes.draw do
   resources :comments
   resources :profiles
   resources :likes
+  
+  post 'homes/follow', to: 'homes#follow'
+  delete 'homes/unfollow', to: 'homes#unfollow'
+
 end
