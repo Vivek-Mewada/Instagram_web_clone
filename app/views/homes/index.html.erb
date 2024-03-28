@@ -121,7 +121,7 @@
                             </div>
                             <% end %>
                         <% end %>
-                   
+                
                 </div>
             <% end %>
         </div>
@@ -149,6 +149,7 @@
                             </div>
                             <div class = "right">
                                 <h5><%#= button_to "Follow"%></h5>
+                                <%= user.id %>
                                 <%= render 'homes/follow_button' , user: user %>
                             </div>
                         </div>

@@ -3,7 +3,12 @@ class HomesController < ApplicationController
   # debugger
   def index
     # debugger
-    @posts = Post.all
+    current_user_follow_id = []
+    current_user.followees.ids.each do |a|
+      current_user_follow_id.push(a)
+    end
+    total_posts_ids = current_user_follow_id.push(current_user.id)
+    @posts = Post.where(user_id: total_posts_ids)
     @comments = Comment.all
     # @comment = Comment.where(commentable_id: params[:id], commentable_type: 'Post')
   end
